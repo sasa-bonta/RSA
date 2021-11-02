@@ -7,7 +7,6 @@
         v-model="field1"
         height="200"
     ></v-textarea>
-        <p>Введённое сообщение: {{ field1 }}</p>
 
     <v-textarea
         label="Second String"
@@ -15,8 +14,8 @@
         filled
         v-model="field2"
         height="200"
+        class="mt-3"
     ></v-textarea>
-        <p>Введённое сообщение: {{ field2 }}</p>
 
     <v-spacer />
 
@@ -25,7 +24,7 @@
           depressed
           color="primary"
           elevation="4"
-          class="mt-8"
+          class="mt-8 mb-8"
           @click="comp"
       >
         Compare
@@ -41,6 +40,18 @@ export default {
     field1: '',
     field2: '',
   }),
+  mounted() {
+    this.field1 = this.$store.getters['stings/getStr1']
+    this.field2 = this.$store.getters['stings/getStr2']
+  },
+  watch: {
+    field1: function (val) {
+      this.$store.commit('strings/mutateStr1', val)
+    },
+     field2: function (val) {
+      this.$store.commit('strings/mutateStr2', val)
+    },
+  },
   methods: {
     comp() {
       alert(this.field1 === this.field2)
