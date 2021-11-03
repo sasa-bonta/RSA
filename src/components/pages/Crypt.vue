@@ -41,15 +41,20 @@
       </v-btn>
     </v-row>
 
-    <v-btn
-        depressed
-        color="secondary"
-        elevation="4"
-        v-clipboard:copy="JSON.stringify(encryptedMessage)"
-        class="mt-10"
-    >
-      Copy
-    </v-btn>
+    <v-row>
+      <v-btn
+          depressed
+          color="secondary"
+          elevation="4"
+          v-clipboard:copy="JSON.stringify(encryptedMessage)"
+          v-clipboard:success="onCopy"
+          class="mt-10 ml-5"
+      >
+        Copy
+      </v-btn>
+      <p class="ml-5 mt-11"><b style="color: green">{{ success }}</b></p>
+    </v-row>
+
     <p class="mt-10">{{ encryptedMessage }}</p>
   </div>
 </template>
@@ -62,6 +67,7 @@ export default {
   data: () => ({
     message: '',
     encryptedMessage: '',
+    success: '',
     p: null,
     q: null,
     fi: null,
@@ -74,6 +80,7 @@ export default {
 
     this.p = this.$store.getters['vars/getP']
     this.q = this.$store.getters['vars/getQ']
+    this.success = ''
   },
   watch: {
     message: function (val) {
@@ -146,6 +153,9 @@ export default {
         }
       }
       return d
+    },
+    onCopy: function () {
+      this.success = "Copied!"
     },
   },
 }
