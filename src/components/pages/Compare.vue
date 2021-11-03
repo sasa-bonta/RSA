@@ -54,9 +54,48 @@ export default {
   },
   methods: {
     comp() {
-      this.field1 = this.field1.replace(/(\r\n|\n|\r)/gm, "")
-      this.field2 = this.field2.replace(/(\r\n|\n|\r)/gm, "")
-      alert(this.field1 === this.field2)
+      const field1Text = this.field1.replace(/(\r\n|\n|\r)/gm, "")
+      const field2Text = this.field2.replace(/(\r\n|\n|\r)/gm, "")
+      alert(`Similarity:  ${this.similarity(field1Text, field2Text) * 100}  %`)
+    },
+    similarity(s1, s2) {
+      let longer = s1;
+      let shorter = s2;
+      if (s1.length < s2.length) {
+        longer = s2;
+        shorter = s1;
+      }
+      let longerLength = longer.length;
+      if (longerLength === 0) {
+        return 1.0;
+      }
+      return (longerLength - this.editDistance(longer, shorter)) / parseFloat(longerLength);
+    },
+    editDistance(s1, s2) {
+      s1 = s1.toLowerCase();
+      s2 = s2.toLowerCase();
+
+      let costs = [];
+      for (let i = 0; i <= s1.length; i++) {
+        let lastValue = i;
+        for (let j = 0; j <= s2.length; j++) {
+          if (i === 0)
+            costs[j] = j;
+          else {
+            if (j > 0) {
+              let newValue = costs[j - 1];
+              if (s1.charAt(i - 1) !== s2.charAt(j - 1))
+                newValue = Math.min(Math.min(newValue, lastValue),
+                    costs[j]) + 1;
+              costs[j - 1] = lastValue;
+              lastValue = newValue;
+            }
+          }
+        }
+        if (i > 0)
+          costs[s2.length] = lastValue;
+      }
+      return costs[s2.length];
     }
   }
 }
