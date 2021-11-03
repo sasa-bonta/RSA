@@ -133,11 +133,6 @@ export default {
       this.encryptedMessage = encryptedMessageArr
     },
 
-    getRandomInt(min, max) {
-      console.log(`Random between ${min} and ${max}`)
-      return 12919;
-    },
-
     getD(fi) {
       let d = null
 
