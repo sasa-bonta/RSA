@@ -145,10 +145,12 @@ export default {
 
       for (let k = 1; k < 101; k++) {
         for (let e = 2; e < 102; e++) {
-          d = (1 + k * fi) / e
-          if (Number.isInteger(d)) {
-            this.e = e
-            return d
+          if (e < fi) {
+            d = (1 + k * fi) / e
+            if (Number.isInteger(d)) {
+              this.e = e
+              return d
+            }
           }
         }
       }
