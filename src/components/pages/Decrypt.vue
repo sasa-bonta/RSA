@@ -22,7 +22,7 @@
       </v-btn>
     </v-row>
 
-    <p>{{ decryptedMessage }}</p>
+    <p class="mt-10">{{ decryptedMessage }}</p>
   </div>
 </template>
 
@@ -39,10 +39,14 @@ export default {
   mounted() {
     this.privateKey = this.$store.getters['keys/getPrivateKey']
     this.message = this.$store.getters['texts/getTextToDecrypt']
+    this.decryptedMessage = this.$store.getters['result/getDecryptedTExt']
   },
   watch: {
     message: function (val) {
       this.$store.commit('texts/mutateTextToDecrypt', val)
+    },
+    decryptedMessage: function (val) {
+      this.$store.commit('result/mutateDecryptedText', val)
     }
   },
   methods: {
@@ -52,7 +56,6 @@ export default {
       for (const code of messageChars) {
         const decryptedCharCode = bigInt(code).modPow(this.privateKey.d, this.privateKey.N)
         decryptedMessageArr.push(String.fromCharCode(decryptedCharCode))
-        console.log(code)
       }
       this.decryptedMessage = decryptedMessageArr.join("")
     },

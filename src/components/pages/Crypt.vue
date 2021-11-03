@@ -23,7 +23,16 @@
       </v-btn>
     </v-row>
 
-    <p class="mt-16">{{ encryptedMessage }}</p>
+    <v-btn
+        depressed
+        color="secondary"
+        elevation="4"
+        v-clipboard:copy="JSON.stringify(encryptedMessage)"
+        class="mt-10"
+    >
+      Copy
+    </v-btn>
+    <p class="mt-10">{{ encryptedMessage }}</p>
   </div>
 </template>
 
@@ -38,10 +47,14 @@ export default {
   }),
   mounted() {
     this.message = this.$store.getters['texts/getTextToCrypt']
+    this.encryptedMessage = this.$store.getters['result/getCryptedTExt']
   },
   watch: {
     message: function (val) {
       this.$store.commit('texts/mutateTextToCrypt', val)
+    },
+    encryptedMessage: function (val) {
+      this.$store.commit('result/mutateCryptedText', val)
     }
   },
   methods: {
@@ -64,8 +77,8 @@ export default {
       const d = this.getD(fi, e)
       console.log(`d: ${d}`)
       // 6
-      const cPub = {e: e, N:N}
-      const cPriv = {d: d, N:N}
+      const cPub = {e: e, N: N}
+      const cPriv = {d: d, N: N}
       this.$store.commit('keys/mutatePublicKey', cPub)
       this.$store.commit('keys/mutatePrivateKey', cPriv)
       console.log(`C.pub: (${cPub.e}, ${cPub.N})`)
@@ -77,8 +90,6 @@ export default {
         const code = char.charCodeAt(0)
         let encryptedCharCode = bigInt(code).modPow(cPub.e, cPub.N)
         encryptedMessageArr.push(encryptedCharCode)
-        console.log(code)
-        console.log("-" + encryptedCharCode)
       }
       this.encryptedMessage = encryptedMessageArr
     },
@@ -91,7 +102,7 @@ export default {
     getD(fi, e) {
       let d = null
       let k = 1;
-      while(Number.isInteger(d) !== true) {
+      while (Number.isInteger(d) !== true) {
         d = (1 + k * fi) / e
         k++
       }

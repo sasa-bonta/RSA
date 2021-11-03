@@ -41,8 +41,8 @@ export default {
     field2: '',
   }),
   mounted() {
-    this.field1 = this.$store.getters['stings/getStr1']
-    this.field2 = this.$store.getters['stings/getStr2']
+    this.field1 = this.$store.getters['strings/getStr1']
+    this.field2 = this.$store.getters['strings/getStr2']
   },
   watch: {
     field1: function (val) {
@@ -54,6 +54,8 @@ export default {
   },
   methods: {
     comp() {
+      this.field1 = this.field1.replace(/(\r\n|\n|\r)/gm, "")
+      this.field2 = this.field2.replace(/(\r\n|\n|\r)/gm, "")
       alert(this.field1 === this.field2)
     }
   }

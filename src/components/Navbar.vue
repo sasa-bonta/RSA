@@ -11,6 +11,7 @@
             :key="link.route"
             :to="link.route"
             text
+            class="ml-5 mr-5"
         >
           {{ link.title }}
         </v-btn>
