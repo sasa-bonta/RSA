@@ -22,6 +22,20 @@
       </v-btn>
     </v-row>
 
+    <v-row>
+      <v-btn
+          depressed
+          color="secondary"
+          elevation="4"
+          v-clipboard:copy="decryptedMessage"
+          v-clipboard:success="onCopy"
+          class="mt-10 ml-5"
+      >
+        Copy
+      </v-btn>
+      <p class="ml-5 mt-11"><b style="color: green">{{ success }}</b></p>
+    </v-row>
+
     <p class="mt-10">{{ decryptedMessage }}</p>
   </div>
 </template>
@@ -34,12 +48,14 @@ export default {
   data: () => ({
     message: '',
     decryptedMessage: '',
+    success: '',
     privateKey: {},
   }),
   mounted() {
     this.privateKey = this.$store.getters['keys/getPrivateKey']
     this.message = this.$store.getters['texts/getTextToDecrypt']
     this.decryptedMessage = this.$store.getters['result/getDecryptedTExt']
+    this.success = ''
   },
   watch: {
     message: function (val) {
@@ -58,6 +74,9 @@ export default {
         decryptedMessageArr.push(String.fromCharCode(decryptedCharCode))
       }
       this.decryptedMessage = decryptedMessageArr.join("")
+    },
+    onCopy: function () {
+      this.success = "Copied!"
     },
   },
 }
