@@ -1,3 +1,5 @@
+# Simple implementation of the RSA algorithm in Vue.js
+
 # rsa-fe
 
 ## Project setup
