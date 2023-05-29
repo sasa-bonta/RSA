@@ -37,7 +37,7 @@
           class="mt-8"
           @click="encrypt"
       >
-        Encrypt
+        Let's encrypt!
       </v-btn>
     </v-row>
 
