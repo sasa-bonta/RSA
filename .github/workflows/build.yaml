@@ -10,5 +10,7 @@ jobs:
         run: npm ci
       - name: Install npm
         run: npm install
+      - name: npx browserslist@latest --update-db
+        run: npx browserslist@latest --update-db
       - name: Build web application
         run: npm run build
