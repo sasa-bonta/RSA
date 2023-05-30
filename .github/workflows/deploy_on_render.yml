@@ -1,14 +1,16 @@
 name: Deploy on Render
-push:
-  branches:
-    - ci/cd
-    - master
-pull_request:
-  branches:
-    - ci/cd
-    - master
-  types:
-    - closed
+
+on:
+  push:
+    branches:
+      - ci/cd
+      - master
+  pull_request:
+    branches:
+      - ci/cd
+      - master
+    types:
+      - closed
 jobs:
   deploy:
     name: Wait for Deploy
