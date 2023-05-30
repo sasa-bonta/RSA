@@ -1,5 +1,16 @@
 name: Test Vue App
-on: push
+on:
+  push:
+    branches:
+      - ci/cd
+      - master
+  pull_request:
+    branches:
+      - ci/cd
+      - master
+    types:
+      - edited
+      - synchronize
 jobs:
   test:
     runs-on: ubuntu-latest
