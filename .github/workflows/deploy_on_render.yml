@@ -1,0 +1,15 @@
+name: Render
+on: push
+jobs:
+  deploy:
+    name: Wait for Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Render Deployment
+        uses: bounceapp/render-action@0.6.0
+        with:
+          api-key: rnd_6FfZjiNqzRyBHUcVr0snQNRMxpb9
+          service-id: srv-chqor767avjb90mhnjrg
+          retries: 20
+          wait: 16000
+          sleep: 30000
