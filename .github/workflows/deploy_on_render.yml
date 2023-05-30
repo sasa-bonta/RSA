@@ -1,5 +1,14 @@
 name: Render
-on: push
+push:
+  branches:
+    - ci/cd
+    - master
+pull_request:
+  branches:
+    - ci/cd
+    - master
+  types:
+    - closed
 jobs:
   deploy:
     name: Wait for Deploy
