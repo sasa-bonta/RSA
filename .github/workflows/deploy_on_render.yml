@@ -1,4 +1,4 @@
-name: Render
+name: Deploy on Render
 push:
   branches:
     - ci/cd
