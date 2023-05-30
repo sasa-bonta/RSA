@@ -1,4 +1,4 @@
-name: Deploy Vue App
+name: Test Vue App
 on: push
 jobs:
   lint:
