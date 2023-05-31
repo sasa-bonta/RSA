@@ -29,4 +29,10 @@ describe('Test main functional', () => {
         // eslint-disable-next-line no-undef
         expect(1 + 6).toBe(7);
     });
+
+    // eslint-disable-next-line no-undef
+    test('test algorithm negative case', () => {
+        // eslint-disable-next-line no-undef
+        expect(false).toEqual(false);
+    });
 });
