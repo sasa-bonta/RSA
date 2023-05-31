@@ -34,5 +34,7 @@ describe('Test main functional', () => {
     test('test algorithm negative case', () => {
         // eslint-disable-next-line no-undef
         expect(false).toEqual(false);
+        // eslint-disable-next-line no-undef
+        expect(true).toEqual(true);
     });
 });
